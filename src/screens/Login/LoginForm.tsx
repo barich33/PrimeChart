@@ -4,7 +4,12 @@ import {useForm} from 'react-hook-form';
 import { useAuthStore } from 'stores/authStore';
 import { login } from '../../services/services';
 import {Button, Input, Text, View} from 'ui';
-
+import { Image, StyleSheet, TextInput} from 'react-native';
+import styles from "./style";
+import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from 'expo-status-bar';
+import { Header } from 'react-native-elements';
+const primechart=require('../../images/primechart.png');
 type Inputs = {
   email: string;
   password: string;
@@ -49,34 +54,37 @@ export const LoginForm = () => {
   }, [register]); 
 
   return (
-    <>
-      <View marginVertical="xl">
-        <Input
+    <View  style={styles.container}> 
+   <Image style={styles.image} source={primechart} /> 
+
+   <StatusBar style="auto" />
+      <Input  style={styles.TextInput}
           placeholder="Email"
           onChangeText={t => setValue('email', t)}
           error={errors.email}
         />
-
-        <Input
+      
+        <Input  style={styles.TextInput}
           placeholder="Password"
           onChangeText={t => setValue('password', t)}
           secureTextEntry={true}
-          error={errors.password}
+          error={errors.password}          
         />
+
         <Text color="grey" textAlign="right">
-          FORGOT?
+          FORGOT Password?
         </Text>
-      </View>
-       <Button
-        label="Sign in"
+        <Button 
+        label="Login"
         onPress={handleSubmit(onSubmit)}
         testID="sign-in-button"
       />
       <Button
-        variant="outline"
-        label="Create account"
-        onPress={() => console.log('button 1')}
-      /> 
-    </>
+        variant="secondary"
+        label="Don’t have an account? Register Here"
+        onPress={() => console.log('button 1')}        
+      />  
+    
+   </View>
   );
-};
+}

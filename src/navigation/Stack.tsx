@@ -25,11 +25,13 @@ export const StackNavigator = () => {
       {isLoggedIn === true ? (
         <Stack.Screen name="Home" component={TabNavigator} />
       ) : (
+        
+     
         <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        />
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
+      />
       )}
     </Stack.Navigator>
   );

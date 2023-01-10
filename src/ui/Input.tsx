@@ -13,14 +13,14 @@ interface Props extends TextInputProps {
 
 export const Input = ({placeholder, error, ...props}: Props) => {
   return (
-    <View marginBottom="s">
+    <View marginBottom="s" style={styles.container}>
       <TextInput
         style={[styles.container, error ? styles.error : {}]}
         placeholder={placeholder}
         {...props}
       />
       {error && (
-        <Text color="red" fontSize={10}>
+        <Text color="red" fontSize={13}>
           {error?.message}
         </Text>
       )}
@@ -29,14 +29,18 @@ export const Input = ({placeholder, error, ...props}: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F0F3F7',
-    padding: 18,
-    borderRadius: 8,
-    fontSize: 16,
+  container: {   
+    backgroundColor: "#ecf0f1",
+    borderRadius: 6,
+    borderColor:'black',
+    width: "70%",
+    height: 45,
+    marginBottom: 20,
+    
   },
   error: {
     borderWidth: 1,
     borderColor: 'red',
+    padding:10,
   },
 });

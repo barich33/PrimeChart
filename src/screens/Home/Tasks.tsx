@@ -1,4 +1,3 @@
-import {useTasks} from 'api';
 import * as React from 'react';
 import {StyleSheet, FlatList, Pressable, ActivityIndicator} from 'react-native';
 import {Check, Text, UnCheck, View} from 'ui';
@@ -41,19 +40,9 @@ const TaskItem = ({label, done: d, color}: TaskType) => {
 };
 
 export const Tasks = () => {
-  const {isLoading, data} = useTasks();
-
-  if (isLoading) {
-    return <ActivityIndicator color="#000" />;
-  }
+ 
   return (
-    <FlatList
-      ListHeaderComponent={() => <Header />}
-      data={data || []}
-      renderItem={({item}) => <TaskItem {...item} />}
-      keyExtractor={(_, index) => `item-${index}`}
-      showsHorizontalScrollIndicator={false}
-    />
+   <Text>Task List</Text>
   );
 };
 

@@ -67,7 +67,7 @@ export const Button = ({
 
   return (
     <TouchableOpacity onPress={onPress} testID={testID}>
-      <ButtonContainer backgroundColor={'primary'}>
+      <ButtonContainer backgroundColor={'secondary'}>
         {loading ? (
           <ActivityIndicator color={text} />
         ) : (

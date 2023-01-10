@@ -9,11 +9,12 @@ export function register({ email, password }) {
   );
 }
 
-export function login({ data }) {
+export function login({ data }) { 
+  
   console.log(data);
     return client.post(
       authEndPoint.login,
-      { email:"tes@gmail.com", password:"123" },
+      { "email":data?.email,"password":data?.password },
       { authorization: false }
     );
   }

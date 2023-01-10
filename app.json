@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "PrimeChart",
-    "slug": "PC",
+    "slug": "primechart",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/primechart.svg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/primechart.svg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,10 +24,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.tagele.primechart"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4720ba83-7a57-4e45-a987-2a7e0e690889"
+      }
+    },
+    "owner": "tagele"
   }
 }

@@ -25,7 +25,7 @@ async function logout(){
 export const client = createAxiosClient({
     options: {
         baseURL: environment.urls.api,
-        timeout: 300000,
+       timeout: 300000,
         headers: {
             'Content-Type': 'application/json',
         }

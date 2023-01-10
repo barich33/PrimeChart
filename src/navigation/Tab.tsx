@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Plus} from 'ui/icons/Plus';
 import {Home} from 'screens';
 import {Button} from 'ui';
+import { useAuthStore } from 'stores/authStore';
 
 function HomeScreen() {
   return (
@@ -14,15 +15,13 @@ function HomeScreen() {
 }
 
 function SettingsScreen() {
-  function signOut(): void {
-    throw new Error('Function not implemented.');
-  }
+  
+  const {logout} = useAuthStore();
 
-  //const {signOut} = useAuth();
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Settings!</Text>
-      <Button label="sign out " onPress={signOut} />
+      <Button label="sign out " onPress={logout} />
     </View>
   );
 }

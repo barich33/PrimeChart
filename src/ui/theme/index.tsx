@@ -15,14 +15,15 @@ const createTheme = <T extends BaseThemeType>(themeObject: T): T => themeObject;
 const BaseTheme = {
   colors: {
     text: '#252A31',
-    background: 'white',
-    primary: '#006CFF',
-    // secondary: '#9c27b0',
+    background: '#0A4854',
+    primary: '#010F12',
+    secondary: '#22DAFE',
     black: '#252A31',
     white: 'white',
     red: '#FF3E5C',
     grey: '#BFC8D6',
     transparent: 'transparent',
+    buttonlabel:'010F12'
   },
   spacing: {
     xs: 4,
@@ -44,6 +45,7 @@ export const theme = createTheme({
       padding: 'm',
       marginVertical: 's',
       borderRadius: 8,
+      width: 280,
     },
     primary: {
       backgroundColor: 'primary',
@@ -54,14 +56,14 @@ export const theme = createTheme({
       borderColor: 'primary',
     },
     secondary: {
-      backgroundColor: 'red',
+      backgroundColor: 'secondary',
     },
   },
   textVariants: {
     defaults: {
-      fontFamily: 'Inter',
+     //fontFamily: 'Inter',
       color: 'text',
-      fontSize: 17,
+      fontSize: 14,
     },
     header: {
       fontWeight: 'bold',
@@ -75,7 +77,7 @@ export const theme = createTheme({
 
     // buttons labels
     button_primary: {
-      color: 'white',
+      color: 'buttonlabel',
     },
     button_outline: {
       color: 'primary',
