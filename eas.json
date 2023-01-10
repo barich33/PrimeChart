@@ -1,9 +1,13 @@
 {
-  "cli": {
-    "version": ">= 3.1.1"
-  },
   "build": {
     "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "qa": {
       "developmentClient": true,
       "distribution": "internal"
     },
@@ -12,7 +16,7 @@
     },
     "production": {}
   },
-  "submit": {
-    "production": {}
+  "cli": {
+    "version": ">= 0.53.1"
   }
 }

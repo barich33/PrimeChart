@@ -1,24 +1,35 @@
-module.exports = function(api) {
-  api.cache(true);
+module.exports = function (api) {
+  api.cache(true)
   return {
     presets: ['babel-preset-expo'],
-    "plugins": [
-      ["module-resolver", {
-      "root": [
-        "./src"
+    plugins: [
+      ["@babel/plugin-transform-react-jsx", {
+        "runtime": "automatic"
+      }],
+      [
+        'module-resolver',
+        {
+          root: ['./'],
+          alias: {
+            /**
+             * Regular expression is used to match all files inside `./src` directory and map each `.src/folder/[..]` to `~folder/[..]` path
+             */
+            '~assets': './assets',
+            '^~(.+)': './src/\\1',
+          },
+          extensions: [
+            '.ios.js',
+            '.android.js',
+            '.js',
+            '.jsx',
+            '.json',
+            '.tsx',
+            '.ts',
+            '.native.js',
+          ],
+        },
       ],
-      "extensions": [
-        ".ios.ts",
-        ".android.ts",
-        ".ts",
-        ".ios.tsx",
-        ".android.tsx",
-        ".tsx",
-        ".jsx",
-        ".js",
-        ".json"
-      ]
-    }]
-    ]
-  };
-};
+      'react-native-reanimated/plugin',
+    ],
+  }
+}

@@ -1,88 +1,114 @@
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  TextInput,
-  Button,
-  Alert,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import { login } from '../services/services';
-import { useAuthStore } from '../stores/authStore';
-import { Text } from '../ui/Text';
-  const LoginScreen = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+import React, { useState } from 'react'
+import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { Text } from 'react-native-paper'
+import Background from '../components/Background'
+import Logo from '../components/Logo'
+import Header from '../components/Header'
+import Button from '../components/Button'
+import TextInput from '../components/TextInput'
+import BackButton from '../components/BackButton'
+import { theme } from '../core/theme'
+import { emailValidator } from '../helpers/emailValidator'
+import { passwordValidator } from '../helpers/passwordValidator'
+import { login } from '~services/services'
+import { useAuthStore } from '~stores/authStore'
+
+const LoginScreen=({ navigation })=> {
+  const [email, setEmail] = useState({ value: '', error: '' })
+  const [password, setPassword] = useState({ value: '', error: '' })
+
     const {setTokensToLocalStorage, refreshToken, isLoggedIn} = useAuthStore();
-    const onLogin = async () => {
-     
-      try {     
-       
-        const response = await login({email, password});
-        const { accessToken, refreshToken } = response.data;
+    const onLoginPressed =async () => {
+      const emailError = emailValidator(email.value)
+      const passwordError = passwordValidator(password.value)
+      if (emailError || passwordError) {
+        setEmail({ ...email, error: emailError })
+        setPassword({ ...password, error: passwordError })
+        return
+      }
+       const data={
+        email:email,
+        password:password
+       };
+       try {  
+        const response =   login({data});
+        console.log(response);
+        const { accessToken, refreshToken } =(await response)?.data;
         setTokensToLocalStorage({ accessToken, refreshToken });
-         console.log(accessToken,refreshToken);
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Dashboard' }],
+        })
+        
       } catch (error:any) {
         return {
           error: error?.response?.data?.message || error.message,
           tokens: null,
         };
       }
-    };
-    
+  }
+ 
   return (
-      <SafeAreaView style={styles.container}>
-        <Text variant="header">Login Page</Text>
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#fefefe"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            onChangeText={text => setEmail(text)}
-            value={email}
-          />
-  
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#fefefe"
-            secureTextEntry
-            onChangeText={text => setPassword(text)}
-            value={password}
-          />
-        </View>
-        <Button title="Login"  onPress={() => onLogin()} />
-      </SafeAreaView>
-    );  
+    <Background>
+      <BackButton goBack={navigation.goBack} />
+      <Logo />
+      <Header>Login</Header>
+      <TextInput
+        label="Email"
+        returnKeyType="next"
+        value={email.value}
+        onChangeText={(text) => setEmail({ value: text, error: '' })}
+        error={!!email.error}
+        errorText={email.error}
+        autoCapitalize="none"
+        autoCompleteType="email"
+        textContentType="emailAddress"
+        keyboardType="email-address" description={undefined}      />
+      <TextInput
+        label="Password"
+        returnKeyType="done"
+        value={password.value}
+        onChangeText={(text) => setPassword({ value: text, error: '' })}
+        error={!!password.error}
+        errorText={password.error}
+        secureTextEntry description={undefined}      />
+      <View style={styles.forgotPassword}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ResetPasswordScreen')}
+        >
+          <Text style={styles.forgot}>Forgot your password?</Text>
+        </TouchableOpacity>
+      </View>
+      <Button mode="contained" onPress={onLoginPressed} style={undefined}>
+        Login
+      </Button>
+      <View style={styles.row}>
+        <Text>Don’t have an account? </Text>
+        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+          <Text style={styles.link}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
+    </Background>
+  )
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-  },
-  logo: {
-    fontSize: 60,
-    color: '#fff',
-    margin: '20%',
-  },
-  form: {
-    width: '80%',
-    margin: '10%',
-  },
-  input: {
-    fontSize: 20,
-    color: '#fff',
-    paddingBottom: 10,
-    borderBottomColor: '#fff',
-    borderBottomWidth: 1,
-    marginVertical: 20,
-  },
-  button: {},
-});
 
 export default LoginScreen;
+const styles = StyleSheet.create({
+  forgotPassword: {
+    width: '100%',
+    alignItems: 'flex-end',
+    marginBottom: 24,
+  },
+  row: {
+    flexDirection: 'row',
+    marginTop: 4,
+  },
+  forgot: {
+    fontSize: 13,
+    color: theme.colors.secondary,
+  },
+  link: {
+    fontWeight: 'bold',
+    color: theme.colors.primary,
+  },
+})

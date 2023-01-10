@@ -11,7 +11,7 @@ export function register({ email, password }) {
 
 export function login({ data }) { 
   
-  console.log(data);
+  console.log("data",data);
     return client.post(
       authEndPoint.login,
       { "email":data?.email,"password":data?.password },
