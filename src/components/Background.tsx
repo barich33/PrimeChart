@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { ImageBackground, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native'
 import { theme } from '../core/theme'
 
   const Background=({ children }:{children:any})=> {
@@ -9,7 +9,7 @@ import { theme } from '../core/theme'
       resizeMode="repeat"
       style={styles.background}
     >
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <KeyboardAvoidingView style={styles.container}  behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={1}>
         {children}
       </KeyboardAvoidingView>
     </ImageBackground>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
   },
   container: {
-    flex: 1,
+   flex: 1,
     padding: 20,
     width: '100%',
     maxWidth: 340,

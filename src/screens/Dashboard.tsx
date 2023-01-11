@@ -9,10 +9,9 @@ const Dashboard=({ navigation })=> {
   return (
     <Background>
       <Logo />
-      <Header>Let’s start</Header>
+      <Header>Coming soon</Header>
       <Paragraph>
-        Your amazing app starts here. Open you favorite code editor and start
-        editing this project.
+      .....
       </Paragraph>
       <Button
         mode="outlined"

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, SafeAreaView, ScrollView, StatusBar } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -12,11 +12,13 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { login } from '~services/services'
 import { useAuthStore } from '~stores/authStore'
+import ActivityIndicator from '~components/ActivityIndicator'
+import Scroll from '~components/Scroll'
 
 const LoginScreen=({ navigation })=> {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-
+    const [loading,setLoading]=useState(false);
     const {setTokensToLocalStorage, refreshToken, isLoggedIn} = useAuthStore();
     const onLoginPressed =async () => {
       const emailError = emailValidator(email.value)
@@ -26,15 +28,17 @@ const LoginScreen=({ navigation })=> {
         setPassword({ ...password, error: passwordError })
         return
       }
+      setLoading(true);
        const data={
-        email:email,
-        password:password
+        email:email.value,
+        password:password.value
        };
        try {  
-        const response =   login({data});
-        console.log(response);
-        const { accessToken, refreshToken } =(await response)?.data;
+        const response =  await login({data});
+        console.log(response.data);
+        const { accessToken, refreshToken } = response?.data;
         setTokensToLocalStorage({ accessToken, refreshToken });
+        setLoading(false);
         navigation.reset({
           index: 0,
           routes: [{ name: 'Dashboard' }],
@@ -49,10 +53,13 @@ const LoginScreen=({ navigation })=> {
   }
  
   return (
+   
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      <BackButton goBack={navigation.goBack} />     
+      <Scroll>
       <Logo />
-      <Header>Login</Header>
+      <Header>Login to Access EHR</Header>
+     
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -82,13 +89,16 @@ const LoginScreen=({ navigation })=> {
       <Button mode="contained" onPress={onLoginPressed} style={undefined}>
         Login
       </Button>
+      <ActivityIndicator loading={loading} />
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
-          <Text style={styles.link}>Sign up</Text>
-        </TouchableOpacity>
-      </View>
+          <Text style={styles.link}>Register Here</Text>
+        </TouchableOpacity>       
+      </View>     
+      </Scroll>
     </Background>
+   
   )
 }
 
@@ -111,4 +121,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.primary,
   },
+ 
 })

@@ -11,6 +11,7 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
+import Scroll from '~components/Scroll'
 
 const RegisterScreen=({ navigation })=> {
   const [name, setName] = useState({ value: '', error: '' })
@@ -36,6 +37,7 @@ const RegisterScreen=({ navigation })=> {
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
+      <Scroll>
       <Logo />
       <Header>Create Account</Header>
       <TextInput
@@ -69,7 +71,7 @@ const RegisterScreen=({ navigation })=> {
         onPress={onSignUpPressed}
         style={{ marginTop: 24 }}
       >
-        Sign Up
+       Register
       </Button>
       <View style={styles.row}>
         <Text>Already have an account? </Text>
@@ -77,6 +79,7 @@ const RegisterScreen=({ navigation })=> {
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
+      </Scroll>
     </Background>
   )
 }
