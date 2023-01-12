@@ -4,10 +4,12 @@ import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Paragraph from '../components/Paragraph'
 import Button from '../components/Button'
+import BackButton from '~components/BackButton'
 
 const Dashboard=({ navigation })=> {
   return (
     <Background>
+      
       <Logo />
       <Header>Coming soon</Header>
       <Paragraph>

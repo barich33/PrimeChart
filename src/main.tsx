@@ -11,19 +11,16 @@ import {
   ResetPasswordScreen,
   Dashboard,
 } from './screens'
+import { useAuthStore } from '~stores/authStore';
 const Stack = createStackNavigator()
 
  function App() {
-  console.log('started');
-  return (
-   /*  <ThemeProvider>
-         <RootNavigator /
-         >
-    </ThemeProvider> */
+  const {isLoggedIn} = useAuthStore();
+  return (  
     <Provider theme={theme}>
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="StartScreen"
+        initialRouteName={isLoggedIn===true?"Dashboard":"StartScreen"}
         screenOptions={{
           headerShown: false,
         }}

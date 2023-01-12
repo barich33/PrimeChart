@@ -14,11 +14,13 @@ import { login } from '~services/services'
 import { useAuthStore } from '~stores/authStore'
 import ActivityIndicator from '~components/ActivityIndicator'
 import Scroll from '~components/Scroll'
+import ErrorMessage from '~components/ErrorMessage'
 
 const LoginScreen=({ navigation })=> {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
     const [loading,setLoading]=useState(false);
+    const [errorMsg,setErrorMsg]=useState(null);
     const {setTokensToLocalStorage, refreshToken, isLoggedIn} = useAuthStore();
     const onLoginPressed =async () => {
       const emailError = emailValidator(email.value)
@@ -34,8 +36,13 @@ const LoginScreen=({ navigation })=> {
         password:password.value
        };
        try {  
-        const response =  await login({data});
-        console.log(response.data);
+        const response =  await login({data});   
+        console.log(response); 
+        if(response?.data?.code?.length>0){
+          setErrorMsg(response?.data?.message)
+          setLoading(false);
+          return;
+        }    
         const { accessToken, refreshToken } = response?.data;
         setTokensToLocalStorage({ accessToken, refreshToken });
         setLoading(false);
@@ -52,14 +59,15 @@ const LoginScreen=({ navigation })=> {
       }
   }
  
-  return (
-   
+  return (   
     <Background>
-      <BackButton goBack={navigation.goBack} />     
+      <BackButton goBack={navigation.goBack} />   
       <Scroll>
       <Logo />
       <Header>Login to Access EHR</Header>
-     
+      {errorMsg && 
+      <ErrorMessage error={errorMsg}/>
+      }
       <TextInput
         label="Email"
         returnKeyType="next"

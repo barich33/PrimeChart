@@ -17,9 +17,9 @@ const optionsPerPage = [2, 3, 4];
   return (
     <Background>
       <Logo />
-      <Header>Login</Header>
+      <Header> About PrimeChart</Header>
       <Paragraph>
-        PrimeChart ......
+      An Electronic Health Record APP for your healthcare facility. A product that will definitely transform your facility.
       </Paragraph>
       <Button
         mode="contained"

@@ -2,12 +2,12 @@
   "expo": {
     "name": "PrimeChart",
     "slug": "primechart",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
-    "icon": "./assets/primechart.svg",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/primechart.svg",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -36,5 +36,6 @@
       }
     },
     "owner": "tagele"
+    
   }
 }
