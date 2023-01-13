@@ -36,7 +36,7 @@ const RegisterScreen=({ navigation })=> {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+     {/*  <BackButton goBack={navigation.goBack} /> */}
       <Scroll>
       <Logo />
       <Header>Create Account</Header>

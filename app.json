@@ -2,12 +2,11 @@
   "expo": {
     "name": "PrimeChart",
     "slug": "primechart",
-    "version": "2.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "version": "1.0.0",
+    "icon": "./assets/ic_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/ic_splash_pc.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/ic_splash.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.tagele.primechart"

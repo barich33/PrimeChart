@@ -22,7 +22,7 @@ const Stack = createStackNavigator()
       <Stack.Navigator
         initialRouteName={isLoggedIn===true?"Dashboard":"StartScreen"}
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
         }}
       >
         <Stack.Screen name="StartScreen" component={StartScreen} />

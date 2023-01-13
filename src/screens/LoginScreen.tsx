@@ -61,7 +61,7 @@ const LoginScreen=({ navigation })=> {
  
   return (   
     <Background>
-      <BackButton goBack={navigation.goBack} />   
+     {/*  <BackButton goBack={navigation.goBack} />    */}
       <Scroll>
       <Logo />
       <Header>Login to Access EHR</Header>

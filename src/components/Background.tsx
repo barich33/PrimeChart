@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { theme } from '../core/theme'
 
   const Background=({ children }:{children:any})=> {
-  return (
-    <SafeAreaView style={styles.safeareaview}>
+    
+  return (   
     <ImageBackground
       source={require('../assets/background_dot.png')}
       resizeMode="repeat"
@@ -15,18 +15,13 @@ import { theme } from '../core/theme'
         {children}
       </KeyboardAvoidingView>
     </ImageBackground>
-    </SafeAreaView>
+
   )
 }
 export default Background;
 
 const styles = StyleSheet.create({
-  safeareaview: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: theme.colors.errorContainer,
-    paddingTop: StatusBar.currentHeight,
-  },
+
   background: {
     flex: 1,
     width: '100%',
