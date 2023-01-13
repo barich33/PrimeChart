@@ -1,20 +1,29 @@
 {
-  "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",
-    "noImplicitAny": false, 
+    "noImplicitAny": false,
     "paths": {
-      "~*": ["src/*"],
-      "~assets": ["assets"]
+      "~*": [
+        "src/*"
+      ],
+      "~assets": [
+        "assets"
+      ]
     },
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    // sets types for project using src/types folder
-    "typeRoots": ["node_modules/@types", "src/types"],
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types"
+    ],
     "jsx": "react-native",
-    "lib": ["es6", "dom", "esnext"],
+    "lib": [
+      "es6",
+      "dom",
+      "esnext"
+    ],
     "target": "esnext",
     "skipLibCheck": true
   },
@@ -27,5 +36,6 @@
     "node_modules",
     "**/*.spec.ts",
     "dist"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }
